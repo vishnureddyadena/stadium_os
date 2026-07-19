@@ -86,7 +86,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     captchaSolution?: string
   ): Promise<LoginResponsePayload> => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/auth/login', {
+      const response = await fetch(`${API_BASE_URL}/api/v1/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -137,7 +137,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const mfaVerify = async (ticket: string, code: string): Promise<boolean> => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/auth/mfa/verify', {
+      const response = await fetch(`${API_BASE_URL}/api/v1/auth/mfa/verify`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -163,7 +163,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const onboard = async (identityCode: string, code: string, pass: string, role?: string): Promise<{ success: boolean; error?: string }> => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/auth/onboard', {
+      const response = await fetch(`${API_BASE_URL}/api/v1/auth/onboard`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -184,7 +184,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const requestReset = async (identityCode: string): Promise<{ success: boolean; token?: string; error?: string }> => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/auth/reset-request', {
+      const response = await fetch(`${API_BASE_URL}/api/v1/auth/reset-request`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ identity_code: identityCode }),
@@ -200,7 +200,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const confirmReset = async (resetToken: string, pass: string): Promise<{ success: boolean; error?: string }> => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/auth/reset-confirm', {
+      const response = await fetch(`${API_BASE_URL}/api/v1/auth/reset-confirm`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token: resetToken, new_password: pass }),
@@ -216,7 +216,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchSessions = async (): Promise<UserSessionInfo[]> => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/auth/sessions');
+      const response = await fetch(`${API_BASE_URL}/api/v1/auth/sessions`);
       if (response.ok) {
         return await response.json();
       }
@@ -228,7 +228,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const revokeSession = async (sessionId: number): Promise<boolean> => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/auth/sessions/revoke', {
+      const response = await fetch(`${API_BASE_URL}/api/v1/auth/sessions/revoke`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ session_id: sessionId }),
@@ -241,7 +241,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const ssoLogin = async (): Promise<boolean> => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/auth/sso/callback', {
+      const response = await fetch(`${API_BASE_URL}/api/v1/auth/sso/callback`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       });
@@ -260,7 +260,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async () => {
     try {
-      await fetch('http://localhost:8000/api/v1/auth/logout', { method: 'POST' });
+      await fetch(`${API_BASE_URL}/api/v1/auth/logout`, { method: 'POST' });
     } catch (e) {
       console.error(e);
     }
