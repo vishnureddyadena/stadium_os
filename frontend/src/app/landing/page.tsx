@@ -760,19 +760,17 @@ export default function LandingPage() {
             className="text-5xl sm:text-6xl md:text-8xl font-black font-display leading-none mb-6"
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
-            <span className="block text-white">Stadium</span>
-            <span
-              className="block glow-text-cyan"
+            <span className="text-white">Stadium</span><span
+              className="glow-text-cyan"
               style={{
                 background: "linear-gradient(135deg, #00D9FF 0%, #73FFD8 50%, #4F46E5 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}
-            >
-              OS AI
-            </span>
+            >OS</span>
           </h1>
+
           <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-3 leading-relaxed">
             One Intelligent Platform for Every Stadium Experience.
           </p>
