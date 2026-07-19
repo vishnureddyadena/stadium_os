@@ -1189,41 +1189,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─────────────────────────────────────────────
-          TECH STACK
-      ───────────────────────────────────────────── */}
-      <section className="relative z-10 py-12 px-4 sm:px-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="liquid-glass-card rounded-2xl p-6 border border-white/5">
-            <div className="text-center mb-6">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Powered By</p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-4">
-              {[
-                { name: "Next.js 15", icon: "▲", color: "#fff" },
-                { name: "FastAPI", icon: "⚡", color: "#00D9FF" },
-                { name: "Gemini AI", icon: "🤖", color: "#73FFD8" },
-                { name: "WebSockets", icon: "🔌", color: "#8B5CF6" },
-                { name: "SQLite/PG", icon: "🗄️", color: "#F59E0B" },
-                { name: "Docker", icon: "🐳", color: "#0ea5e9" },
-                { name: "Kubernetes", icon: "☸️", color: "#4F46E5" },
-                { name: "TypeScript", icon: "📘", color: "#3b82f6" },
-              ].map((tech) => (
-                <button
-                  key={tech.name}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl liquid-glass-card border border-white/5 hover:border-white/15 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
-                  onClick={() => showNotif(`💡 Technology: ${tech.name}`)}
-                >
-                  <span className="text-sm">{tech.icon}</span>
-                  <span className="text-xs font-semibold" style={{ color: tech.color }}>
-                    {tech.name}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* ─────────────────────────────────────────────
           CTA SECTION
