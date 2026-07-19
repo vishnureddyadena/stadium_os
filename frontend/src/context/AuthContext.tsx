@@ -7,7 +7,7 @@ export interface UserProfile {
   id: number;
   name: string;
   email: string | null;
-  role: 'FAN' | 'VOLUNTEER' | 'SECURITY' | 'MEDICAL' | 'ORGANIZER' | 'VIP' | 'ADMIN' | 'SUPER_ADMIN';
+  role: 'FAN' | 'VOLUNTEER' | 'SECURITY' | 'MEDICAL' | 'ORGANIZER' | 'VENDOR' | 'VIP' | 'ADMIN' | 'SUPER_ADMIN';
   employee_id?: string;
   volunteer_id?: string;
   fifa_id?: string;
