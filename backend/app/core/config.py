@@ -1,5 +1,5 @@
 import os
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Optional
 from dotenv import load_dotenv
 
@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), ".env"))
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
+
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Stadium OS AI"
@@ -23,7 +24,6 @@ class Settings(BaseSettings):
     # Real-time WebSocket
     WS_HEARTBEAT_INTERVAL: int = 10  # seconds
     
-    class Config:
-        case_sensitive = True
+    model_config = SettingsConfigDict(case_sensitive=True)
 
 settings = Settings()

@@ -78,4 +78,73 @@ def test_ticket_verification_and_fraud():
     assert "cloned scan pattern detected" in response_fraud.json()["message"]
 
 
+def test_create_and_fetch_incident():
+    # Login as admin to obtain token
+    login_payload = {
+        "identity_code": "admin@stadiumos.ai",
+        "password": "admin123",
+        "device_fingerprint": "TEST-ADMIN-FP"
+    }
+    login_res = client.post("/api/v1/auth/login", json=login_payload)
+    token = login_res.json()["access_token"]
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # Post new incident
+    incident_payload = {
+        "title": "Suspect package at Gate B",
+        "description": "Unattended bag near security gates",
+        "category": "SECURITY",
+        "severity": "HIGH",
+        "location": "GATE_B"
+    }
+    response = client.post("/api/v1/modules/incidents", json=incident_payload, headers=headers)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["title"] == "Suspect package at Gate B"
+    assert data["category"] == "SECURITY"
+
+    # Fetch incidents
+    fetch_res = client.get("/api/v1/modules/incidents?category=SECURITY", headers=headers)
+    assert fetch_res.status_code == 200
+    assert len(fetch_res.json()) >= 1
+
+
+def test_sustainability_logs():
+    login_payload = {
+        "identity_code": "admin@stadiumos.ai",
+        "password": "admin123",
+        "device_fingerprint": "TEST-ADMIN-FP"
+    }
+    login_res = client.post("/api/v1/auth/login", json=login_payload)
+    token = login_res.json()["access_token"]
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # Fetch history
+    history_res = client.get("/api/v1/modules/sustainability/history?category=ENERGY", headers=headers)
+    assert history_res.status_code == 200
+    assert isinstance(history_res.json(), list)
+
+
+def test_notifications_broadcast():
+    login_payload = {
+        "identity_code": "admin@stadiumos.ai",
+        "password": "admin123",
+        "device_fingerprint": "TEST-ADMIN-FP"
+    }
+    login_res = client.post("/api/v1/auth/login", json=login_payload)
+    token = login_res.json()["access_token"]
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # Post alert
+    alert_payload = {
+        "message": "Storm alert: Seek shelter in concourse",
+        "target_role": "ALL",
+        "type": "EMERGENCY"
+    }
+    response = client.post("/api/v1/modules/notifications", json=alert_payload, headers=headers)
+    assert response.status_code == 200
+    assert response.json()["message"] == alert_payload["message"]
+
+
+
 
