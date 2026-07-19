@@ -68,7 +68,8 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     const connect = () => {
       try {
-        ws = new WebSocket('ws://localhost:8000/api/v1/ws');
+        const { WS_BASE_URL } = require('@/config');
+        ws = new WebSocket(`${WS_BASE_URL}/api/v1/ws`);
         
         ws.onopen = () => {
           setIsConnected(true);
