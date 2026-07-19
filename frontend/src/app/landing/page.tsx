@@ -792,21 +792,8 @@ export default function LandingPage() {
             <span>Launch Dashboard</span>
             <span className="text-cyan-200">→</span>
           </button>
-          <button
-            className="liquid-glass-btn text-cyan-300 font-semibold px-8 py-4 rounded-2xl text-sm flex items-center gap-3 w-full sm:w-auto justify-center"
-            onClick={() => router.push('/login')}
-          >
-            <span>▶</span>
-            <span>Watch Demo</span>
-          </button>
-          <button
-            className="liquid-glass-btn text-slate-300 font-semibold px-8 py-4 rounded-2xl text-sm flex items-center gap-3 w-full sm:w-auto justify-center"
-            onClick={() => router.push('/login')}
-          >
-            <span>📚</span>
-            <span>API Docs</span>
-          </button>
         </div>
+
 
         {/* ── LIVE STAT CARDS ── */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
