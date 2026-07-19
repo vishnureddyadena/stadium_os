@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
+import { API_BASE_URL } from '@/config';
+
 import { 
   KeyRound, ShieldAlert, Fingerprint, Lock, Shield, Cpu, 
   HelpCircle, Sparkles, RefreshCw, LogIn, ChevronRight, UserPlus 
@@ -48,7 +50,7 @@ export default function LoginPage() {
   // Fetch a captcha code on mount
   const fetchCaptcha = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/auth/captcha');
+      const response = await fetch(`${API_BASE_URL}/api/v1/auth/captcha`);
       if (response.ok) {
         const data = await response.json();
         setCaptchaId(data.captcha_id);
