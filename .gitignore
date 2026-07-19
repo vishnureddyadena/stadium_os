@@ -23,6 +23,8 @@ yarn-error.log*
 .env.production.local
 **/.env
 **/stadium_os.db
+.env.example
+**/.env.example
 
 # Operating System
 .DS_Store
