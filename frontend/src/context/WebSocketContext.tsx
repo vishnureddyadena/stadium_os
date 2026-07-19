@@ -2,6 +2,14 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
+import { API_BASE_URL } from '@/config';
+
+// ── Keep-alive: ping backend every 10 min to prevent Render free-tier cold starts ──
+if (typeof window !== 'undefined') {
+  const ping = () => fetch(`${API_BASE_URL}/api/v1/health`, { method: 'GET' }).catch(() => {});
+  ping(); // immediate ping on load
+  setInterval(ping, 10 * 60 * 1000); // repeat every 10 minutes
+}
 
 export interface CrowdSensorData {
   id: number;

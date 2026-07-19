@@ -99,3 +99,7 @@ def read_root():
         "location": "Dallas Stadium (FIFA 2026 Venue)",
         "docs": "/docs"
     }
+
+@app.get("/api/v1/health")
+def health_check():
+    return {"status": "ok"}
