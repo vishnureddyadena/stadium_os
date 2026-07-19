@@ -347,27 +347,31 @@ export default function LoginPage() {
               {activePanel === 'login' && (
                 <form onSubmit={handleLoginSubmit} className="space-y-5">
                   <div>
-                    <label className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">
+                    <label htmlFor="identity_code_input" className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">
                       Identity Identifier Code
                     </label>
                     <input
+                      id="identity_code_input"
                       type="text"
                       value={identityCode}
                       onChange={e => setIdentityCode(e.target.value)}
                       required
                       placeholder="Email, Employee ID (EMP-100), Volunteer (VOL-400), or FIFA ID"
                       className="w-full glass-input text-xs"
+                      aria-required="true"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">
+                    <label htmlFor="password_input" className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">
                       Credentials Password
                     </label>
                     <input
+                      id="password_input"
                       type="password"
                       value={password}
                       onChange={e => setPassword(e.target.value)}
+
                       required
                       placeholder="••••••••"
                       className="w-full glass-input text-xs"
