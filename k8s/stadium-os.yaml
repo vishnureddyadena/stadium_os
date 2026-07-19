@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: stadium-os
+
+---
+# Backend deployment configuration
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stadium-os-backend
+  namespace: stadium-os
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: stadium-os-backend:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        env:
+        - name: SECRET_KEY
+          value: "k8s_super_secure_fifa_stadium_key_2026"
+        - name: DATABASE_URL
+          value: "sqlite:///./stadium_os.db"
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+
+---
+# Backend service interface
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: stadium-os
+spec:
+  selector:
+    app: backend
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+  type: ClusterIP
+
+---
+# Frontend Next.js deployment configuration
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stadium-os-frontend
+  namespace: stadium-os
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: stadium-os-frontend:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+
+---
+# Frontend service interface
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: stadium-os
+spec:
+  selector:
+    app: frontend
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+  type: LoadBalancer
